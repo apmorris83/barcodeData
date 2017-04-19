@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 var config = require('./config');
 var db = 'mongodb://user:password@ds035026.mlab.com:35026/products';
 var PORT = config.PORT[process.env.NODE_ENV] || process.env.PORT;
-
+const bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(db, function (err) {
@@ -15,6 +15,8 @@ mongoose.connect(db, function (err) {
     console.log(`error connecting to the Database ${err}`);
   }
 });
+
+app.use(bodyParser.json());
 
 app.use(function (request, response, next) {
     console.log('Received request!');
