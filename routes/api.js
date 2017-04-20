@@ -38,9 +38,9 @@ router.route('/products')
         });
     });
 
-    router.route('/products/:code')
+    router.route('/products/:product_id')
       .delete(function (request, response) {
-        productModel.find({ code: request.params.code }).remove(function (error, products) {
+        productModel.findById(request.params.product_id).remove(function (error, products) {
           if (error) return response.status(404).send({reason: 'PRODUCT NOT FOUND'});
           response.status(200).send({data: products});
         });
