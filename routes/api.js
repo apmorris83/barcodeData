@@ -30,7 +30,7 @@ router.route('/products/:code')
 router.route('/products')
     .post(function (request, response) {
         let product = new productModel(request.body);
-        product.save({}, function (err, product) {
+        product.save(function (err, product) {
             if (err) {
                 return response.status(500).send({ err: err });
             }
