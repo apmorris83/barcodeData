@@ -38,4 +38,12 @@ router.route('/products')
         });
     });
 
+    router.route('/products/:code')
+      .delete(function (request, response) {
+        productModel.find({ code: request.params.code }).remove(function (error, products) {
+          if (error) return response.status(404).send({reason: 'PRODUCT NOT FOUND'});
+          response.status(200).send({data: products});
+        });
+      });
+
 module.exports = router;
